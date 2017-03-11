@@ -14,6 +14,7 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
         outline: none;
     }
 }
+
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar
 {
@@ -29,6 +30,7 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     border-radius: 10px;
     background-color: #F5F5F5;
 }
+
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb
 {
@@ -48,18 +50,23 @@ html,body{
     width: 100%;
     background-color: #f2f2f2;
 }
+
+
 .clear:after{
     content: '';
     display: block;
     clear: both;
 }
+
 .clear{
     zoom:1;
 }
+
 .back_img{
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
+
 .margin{
     margin: 0 auto;
 }
@@ -79,12 +86,13 @@ html,body{
 .show{
     display: block;
 }
+
 .ellipsis{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .paddingTop{
     padding-top: 1.95rem;
 }
-

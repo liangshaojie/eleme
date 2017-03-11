@@ -10,8 +10,9 @@ const setpromise = data => {
         resolve(data)
     })
 }
-
-
 export const getUser = () => setpromise(login.userInfo);
-export const getAddressList = (user_id) => setpromise(addresspart.address)
+export const getAddressList = (user_id) => setpromise(addresspart.address);
+export const cityGuess = () => setpromise(home.guesscity);
+export const hotcity = () => setpromise(home.hotcity);
+export const groupcity = () => setpromise(home.groupcity);
 
