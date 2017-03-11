@@ -1,15 +1,19 @@
 <template>
-  <div>
-   我是主页
-  </div>
+    <div>
+        <transition name="router-fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+    export default {
+
+    }
 </script>
 
-<style>
+<style rel="stylesheet/scss" lang="scss" >
+    @import './style/common.scss';
+
 
 </style>
