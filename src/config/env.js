@@ -19,7 +19,7 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 export {
-    // baseUrl,
+    baseUrl,
     routerMode,
-    // imgBaseUrl
+    imgBaseUrl
 }
