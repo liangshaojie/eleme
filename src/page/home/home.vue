@@ -9,7 +9,7 @@
                 <span>定位不准时，请在城市列表中选择</span>
             </div>
             <router-link :to="'/city/' + guessCityid" class="guess_city">
-                <span></span>
+                <span>{{guessCity}}</span>
                 <svg class="arrow_right">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                 </svg>
@@ -96,7 +96,7 @@
     }
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
+<style rel="stylesheet/scss" lang="scss" scoped>
     @import '../../style/mixin';
     .head_logo{
         left: 0.4rem;
