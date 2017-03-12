@@ -4,6 +4,7 @@ const city = r => require.ensure([], () => r(require('../page/city/city')), 'cit
 const msite = r => require.ensure([], () => r(require('../page/msite/msite')), 'msite');
 const search = r => require.ensure([], () => r(require('../page/search/search')), 'search');
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile');
+const food = r => require.ensure([], () => r(require('../page/food/food')), 'food');
 
 
 
@@ -40,7 +41,12 @@ export default [{
 	    {
 		    path: '/profile',
 		    component: profile,
-	    }
+	    },
+	    //特色商铺列表页
+	    {
+		    path: '/food',
+		    component: food
+	    },
 
     ]
 }]

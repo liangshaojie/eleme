@@ -32,4 +32,7 @@ export const msiteAdress = geohash => setpromise(msite.msiteAdress);
 export const msiteFoodTypes = geohash => setpromise(msite.foodTypes);
 export const shopList = (latitude, longitude, offset) => setpromise(msite.shopList);
 export const searchRestaurant = (geohash, keyword) => setpromise(search.searchData);
+export const foodCategory = (latitude, longitude) => setpromise(food.category);
+export const foodDelivery = (latitude, longitude) => setpromise(food.delivery);
+export const foodActivity = (latitude, longitude) => setpromise(food.activity);
 

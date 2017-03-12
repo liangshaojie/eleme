@@ -151,12 +151,12 @@
 				sortByType: function (value){
 					this.listenPropChange();
 				},
-                //监听父级的确认按钮是否被点击，并且返回一个自定义事件通知父级，已经接收到数据，此时父级才可以清除已选状态
+				//监听父级的确认按钮是否被点击，并且返回一个自定义事件通知父级，已经接收到数据，此时父级才可以清除已选状态
 				confirmSelect: function (value){
 					this.listenPropChange();
 					this.$emit('DidConfrim');
 				}
-            }
+			}
 		}
 
 	}
