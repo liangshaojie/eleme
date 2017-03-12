@@ -31,4 +31,5 @@ export const searchplace = (cityid, value) => setpromise(city.searchdata);
 export const msiteAdress = geohash => setpromise(msite.msiteAdress);
 export const msiteFoodTypes = geohash => setpromise(msite.foodTypes);
 export const shopList = (latitude, longitude, offset) => setpromise(msite.shopList);
+export const searchRestaurant = (geohash, keyword) => setpromise(search.searchData);
 
