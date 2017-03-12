@@ -35,7 +35,7 @@
             </header>
             <shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
         </div>
-        <!--<foot-guide></foot-guide>-->
+        <foot-guide></foot-guide>
     </div>
 </template>
 
@@ -44,6 +44,7 @@
 	import headTop from '../../components/header/head.vue';
 	import shopList from '../../components/common/shoplist'
 	import {imgBaseUrl} from '../../config/env';
+	import footGuide from '../../components/footer/footGuide'
 	import '../../plugins/swiper.min.js'
 	import '../../style/swiper.min.css'
 	import {
@@ -62,7 +63,7 @@
 			}
 		},
 		components: {
-			headTop,shopList
+			headTop,shopList,footGuide
 		},
 		beforeMount(){
 			//从参数中取得值

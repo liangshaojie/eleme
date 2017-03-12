@@ -2,7 +2,8 @@ import App from '../App'
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home');
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city');
 const msite = r => require.ensure([], () => r(require('../page/msite/msite')), 'msite');
-const search = r => require.ensure([], () => r(require('../page/search/search')), 'search')
+const search = r => require.ensure([], () => r(require('../page/search/search')), 'search');
+const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile');
 
 
 
@@ -35,5 +36,11 @@ export default [{
 		    path: '/search/:geohash',
 		    component: search
 	    },
+	    //个人信息页
+	    {
+		    path: '/profile',
+		    component: profile,
+	    }
+
     ]
 }]
