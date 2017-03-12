@@ -125,6 +125,9 @@
 			async listenPropChange(){
 				this.offset = 0;
 				this.showLoading = true;
+				console.log("--------------------------------------");
+				console.log(this.restaurantCategoryIds+'|||'+this.sortByType+"||||||"+this.deliveryMode+"|||||||"+this.supportIds);
+				console.log("--------------------------------------");
 				this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
 				if (process.env.NODE_ENV !== 'development') {
 					this.shopListArr = this.shopListArr.reverse();
@@ -142,23 +145,22 @@
 					this.showLoading = false;
 				}
 			},
-			watch: {
-				//监听父级传来的restaurantCategoryIds，当值发生变化的时候重新获取餐馆数据，作用于排序和筛选
-				restaurantCategoryIds: function (value){
-					this.listenPropChange();
-				},
-				//监听父级传来的排序方式
-				sortByType: function (value){
-					this.listenPropChange();
-				},
-				//监听父级的确认按钮是否被点击，并且返回一个自定义事件通知父级，已经接收到数据，此时父级才可以清除已选状态
-				confirmSelect: function (value){
-					this.listenPropChange();
-					this.$emit('DidConfrim');
-				}
+		},
+		watch: {
+			//监听父级传来的restaurantCategoryIds，当值发生变化的时候重新获取餐馆数据，作用于排序和筛选
+			restaurantCategoryIds: function (value){
+				this.listenPropChange();
+			},
+			//监听父级传来的排序方式
+			sortByType: function (value){
+				this.listenPropChange();
+			},
+			//监听父级的确认按钮是否被点击，并且返回一个自定义事件通知父级，已经接收到数据，此时父级才可以清除已选状态
+			confirmSelect: function (value){
+				this.listenPropChange();
+				this.$emit('DidConfrim');
 			}
 		}
-
 	}
 
 

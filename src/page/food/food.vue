@@ -326,13 +326,6 @@
 	        headTop,shopList
         }
     }
-
-
-
-
-
-
-
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
