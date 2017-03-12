@@ -2,7 +2,8 @@ import {
 	GET_USERINFO,
 	SAVE_ADDRESS,
 	SAVE_GEOHASH,
-	RECORD_ADDRESS
+	RECORD_ADDRESS,
+	SAVE_AVANDER
 }from './mutation-types.js'
 
 export default {
@@ -37,7 +38,11 @@ export default {
 	[RECORD_ADDRESS](state,{latitude,longitude}){
 		state.latitude = latitude;
 		state.longitude = longitude;
-	}
+	},
+	//保存图片
+	[SAVE_AVANDER](state, imgPath) {
+		state.imgPath = imgPath;
+	},
 
 }
 
