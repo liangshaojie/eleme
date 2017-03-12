@@ -35,4 +35,9 @@ export const searchRestaurant = (geohash, keyword) => setpromise(search.searchDa
 export const foodCategory = (latitude, longitude) => setpromise(food.category);
 export const foodDelivery = (latitude, longitude) => setpromise(food.delivery);
 export const foodActivity = (latitude, longitude) => setpromise(food.activity);
+export const shopDetails = (shopid, latitude, longitude) => setpromise(shop.shopDetails);
+export const foodMenu = restaurant_id => setpromise(shop.shopMenu);
+export const getRatingList = (offset, tag_name = '') => setpromise(shop.ratingList);
+export const ratingScores = shopid => setpromise(shop.scores);
+export const ratingTags = shopid => setpromise(shop.tage);
 

@@ -3,8 +3,14 @@ import {
 	SAVE_ADDRESS,
 	SAVE_GEOHASH,
 	RECORD_ADDRESS,
-	SAVE_AVANDER
+	SAVE_AVANDER,
+	INIT_BUYCART,
+	RECORD_SHOPDETAIL
 }from './mutation-types.js'
+import {
+	setStore,
+	getStore,
+} from '../config/mUtils'
 
 export default {
 	//获取用户信息存入vuex
@@ -42,6 +48,16 @@ export default {
 	//保存图片
 	[SAVE_AVANDER](state, imgPath) {
 		state.imgPath = imgPath;
+	},
+	//网页初始化时从本地缓存获取购物车数据
+	[INIT_BUYCART](state) {
+		let initCart = getStore('buyCart');
+		if (initCart) {
+			state.cartList = JSON.parse(initCart);
+		}
+	},
+	[RECORD_SHOPDETAIL](state, detail) {
+		state.shopDetail = detail;
 	},
 
 }
