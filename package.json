@@ -12,6 +12,7 @@
     "fastclick": "^1.0.6",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
+    "vue-swiper": "^0.5.0",
     "vuex": "^2.2.1"
   },
   "devDependencies": {

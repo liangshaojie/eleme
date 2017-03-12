@@ -24,6 +24,8 @@
 </template>
 <script type="text/ecmascript-6">
 	import {mapState, mapActions} from 'vuex'
+//		import '../../plugins/swiper.min.js'
+//		import '../../style/swiper.min.css'
 	export default {
 		data(){
 			return{

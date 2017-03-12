@@ -35,6 +35,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        exclude: /plugins/,
         include: [resolve('src'), resolve('test')]
       },
       {

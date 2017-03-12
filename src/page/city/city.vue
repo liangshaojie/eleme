@@ -3,7 +3,7 @@
         <head-top :head-title="cityname" go-back='true'>
             <router-link to="/home" slot="changecity" class="change_city">切换城市</router-link>
         </head-top>
-        <!--组织默认提交 v-on:submit.prevent-->
+        <!--阻止默认提交 v-on:submit.prevent-->
         <form class="city_form" v-on:submit.prevent>
             <div>
                 <input type="search" name="city" placeholder="输入学校、商务楼、地址" class="city_input input_style" required v-model='inputVaule' >

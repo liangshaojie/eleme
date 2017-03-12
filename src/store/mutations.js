@@ -1,8 +1,9 @@
 import {
 	GET_USERINFO,
-	SAVE_ADDRESS
+	SAVE_ADDRESS,
+	SAVE_GEOHASH,
+	RECORD_ADDRESS
 }from './mutation-types.js'
-
 
 export default {
 	//获取用户信息存入vuex
@@ -28,6 +29,15 @@ export default {
 	[SAVE_ADDRESS](state, newAdress) {
 		state.removeAddress = newAdress
 	},
+	//保存geohash
+	[SAVE_GEOHASH](state,geohash){
+		state.geohash = geohash
+	},
+	// 记录当前经度纬度
+	[RECORD_ADDRESS](state,{latitude,longitude}){
+		state.latitude = latitude;
+		state.longitude = longitude;
+	}
 
 }
 
