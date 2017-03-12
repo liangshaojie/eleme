@@ -33,7 +33,7 @@
                 </svg>
                 <span class="shop_header_title">附近商家</span>
             </header>
-            <!--<shop-list v-if="hasGetData" :geohash="geohash"></shop-list>-->
+            <shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
         </div>
         <!--<foot-guide></foot-guide>-->
     </div>
@@ -42,6 +42,7 @@
 <script type="text/ecmascript-6">
 	import {mapMutations} from 'vuex'
 	import headTop from '../../components/header/head.vue';
+	import shopList from '../../components/common/shoplist'
 	import {imgBaseUrl} from '../../config/env';
 	import '../../plugins/swiper.min.js'
 	import '../../style/swiper.min.css'
@@ -61,7 +62,7 @@
 			}
 		},
 		components: {
-			headTop,
+			headTop,shopList
 		},
 		beforeMount(){
 			//从参数中取得值
@@ -96,7 +97,6 @@
 						loop: true
 					});
                 });
-
             });
 		},
 		methods: {
