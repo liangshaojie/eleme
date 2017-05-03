@@ -59,7 +59,6 @@ export const loadMore = {
 						}
 					})
 				}
-
 				const loadMore = () => {
 					if (scrollEl.scrollTop + windowHeight >= height + setTop + paddingBottom + marginBottom - scrollReduce) {
 						binding.value();
