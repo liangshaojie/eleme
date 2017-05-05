@@ -121,7 +121,7 @@
                                                 <span v-if="foods.specifications.length">起</span>
                                             </section>
                                             <!--<buy-cart :shopId='shopId' :foods='foods' @moveInCart="listenInCart" @showChooseList="showChooseList" @showReduceTip="showReduceTip" @showMoveDot="showMoveDotFun"></buy-cart>-->
-                                            <buy-cart :shopId='shopId' :foods='foods'></buy-cart>
+                                            <buy-cart :shopId='shopId' :foods='foods' @showMoveDot="showMoveDotFun" ></buy-cart>
                                         </footer>
                                     </section>
                                 </li>
@@ -254,9 +254,9 @@
             </transition>
         </section>
         <section>
-            <!--<transition name="fade">-->
-                <!--<div class="specs_cover" @click="showChooseList" v-if="showSpecs"></div>-->
-            <!--</transition>-->
+            <transition name="fade">
+                <div class="specs_cover" @click="showChooseList" v-if="showSpecs"></div>
+            </transition>
             <!--<transition name="fadeBounce">-->
                 <!--<div class="specs_list" v-if="showSpecs">-->
                     <!--<header class="specs_list_header">-->
@@ -284,6 +284,22 @@
                 <!--</div>-->
             <!--</transition>-->
         </section>
+        <transition name="fade">
+            <p class="show_delete_tip" v-if="showDeleteTip">多规格商品只能去购物车删除哦</p>
+        </transition>
+        <transition
+                appear
+                @after-appear = 'afterEnter'
+                @before-appear="beforeEnter"
+                v-for="(item,index) in showMoveDot"
+                :key="item.id"
+        >
+            <span class="move_dot" v-if="item" >
+                <svg class="move_liner">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
+                </svg>
+            </span>
+        </transition>
     </div>
 </template>
 
@@ -344,6 +360,10 @@
             ...mapState([
                 'latitude','longitude','cartList'
             ]),
+            //当前商店购物信息
+            shopCart: function (){
+                return {...this.cartList[this.shopId]};
+            },
             promotionInfo: function (){
                 return this.shopDetailData.promotion_info || '欢迎光临，用餐高峰期请提前下单，谢谢。'
             },
@@ -381,6 +401,43 @@
             ...mapMutations([
                 'RECORD_ADDRESS','ADD_CART','REDUCE_CART','INIT_BUYCART','CLEAR_CART','RECORD_SHOPDETAIL'
             ]),
+            //监听圆点是否进入购物车
+            listenInCart(){
+                if (!this.receiveInCart) {
+                    this.receiveInCart = true;
+                    this.$refs.cartContainer.addEventListener('animationend', () => {
+                        this.receiveInCart = false;
+                    })
+                    this.$refs.cartContainer.addEventListener('webkitAnimationEnd', () => {
+                        this.receiveInCart = false;
+                    })
+                }
+            },
+            beforeEnter(el){
+                el.style.transform = `translate3d(0,${37 + this.elBottom - this.windowHeight}px,0)`;
+                el.children[0].style.transform = `translate3d(${this.elLeft - 30}px,0,0)`;
+                el.children[0].style.opacity = 0;
+            },
+            afterEnter(el){
+                el.style.transform = `translate3d(0,0,0)`;
+                el.children[0].style.transform = `translate3d(0,0,0)`;
+                el.style.transition = 'transform .55s cubic-bezier(0.3, -0.25, 0.7, -0.15)';
+                el.children[0].style.transition = 'transform .55s linear';
+                this.showMoveDot = this.showMoveDot.map(item => false);
+                el.children[0].style.opacity = 1;
+                el.children[0].addEventListener('transitionend', () => {
+                    this.listenInCart();
+                })
+                el.children[0].addEventListener('webkitAnimationEnd', () => {
+                    this.listenInCart();
+                })
+            },
+            //显示下落圆球
+            showMoveDotFun(showMoveDot, elLeft, elBottom){
+                this.showMoveDot = [...this.showMoveDot, ...showMoveDot];
+                this.elLeft = elLeft;
+                this.elBottom = elBottom;
+            },
             //获取食品列表的高度，存入shopListTop
             getFoodListHeight(){
                 const baseHeight = this.$refs.shopheader.clientHeight;   //头部的高度
@@ -538,7 +595,7 @@
             },
         },
         components:{
-            loading,
+            loading,buyCart
         },
         watch: {
             //showLoading变化时说明组件已经获取初始化数据，在下一帧nextTick进行后续操作
@@ -548,6 +605,15 @@
                         this.getFoodListHeight();
                         this.initCategoryNum();
                     })
+                }
+            },
+            shopCart: function (value){
+                this.initCategoryNum();
+            },
+            //购物车列表发生变化，没有商铺时，隐藏
+            cartFoodList: function (value){
+                if(!value.length){
+                    this.showCartList = false;
                 }
             },
             //商品、评论切换状态
@@ -1258,6 +1324,16 @@
                     }
                 }
             }
+        }
+    }
+    .move_dot{
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+
+        svg{
+            @include wh(.9rem, .9rem);
+            fill: #3190e8;
         }
     }
     .fade-enter-active, .fade-leave-active {
