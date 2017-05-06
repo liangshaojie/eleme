@@ -7,7 +7,8 @@ import {
 	INIT_BUYCART,
 	RECORD_SHOPDETAIL,
     ADD_CART,
-    REDUCE_CART
+    REDUCE_CART,
+    CLEAR_CART
 }from './mutation-types.js'
 import {
 	setStore,
@@ -59,8 +60,8 @@ export default {
 		}
 	},
 	[RECORD_SHOPDETAIL](state, detail) {
-		state.shopDetail = detail;
-	},
+        state.shopDetail = detail;
+    },
     // 加入购物车
     [ADD_CART](state, {shopid, category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock}) {
         let cart = state.cartList;
@@ -102,6 +103,12 @@ export default {
                 item[food_id] = null;
             }
         }
+    },
+    //清空当前商品的购物车信息
+    [CLEAR_CART](state, shopid) {
+        state.cartList[shopid] = null;
+        state.cartList = {...state.cartList};
+        setStore('buyCart', state.cartList);
     },
 
 }
