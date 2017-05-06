@@ -300,6 +300,10 @@
                 </svg>
             </span>
         </transition>
+        <loading v-show="showLoading || loadRatings"></loading>
+        <transition name="router-slid" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -539,6 +543,7 @@
                 this.RECORD_SHOPDETAIL(this.shopDetailData)
                 //隐藏加载动画
                 this.hideLoading();
+
             },
             //隐藏动画
             hideLoading(){
@@ -1510,5 +1515,21 @@
     }
     .fade-choose-enter, .fade-choose-leave-active {
         opacity: 0;
+    }
+    .fade-choose-enter, .fade-choose-leave-active {
+        opacity: 0;
+    }
+    .router-slid-enter-active, .router-slid-leave-active {
+        transition: all .4s;
+    }
+    .router-slid-enter, .router-slid-leave-active {
+        transform: translate3d(2rem, 0, 0);
+        opacity: 0;
+    }
+    .toggle-cart-enter-active, .toggle-cart-leave-active {
+        transition: all .3s ease-out;
+    }
+    .toggle-cart-enter, .toggle-cart-leave-active {
+        transform: translateY(100%);
     }
 </style>
