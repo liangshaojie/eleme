@@ -120,7 +120,6 @@
                                                 <span>{{foods.specfoods[0].price}}</span>
                                                 <span v-if="foods.specifications.length">起</span>
                                             </section>
-                                            <!--<buy-cart :shopId='shopId' :foods='foods' @moveInCart="listenInCart" @showChooseList="showChooseList" @showReduceTip="showReduceTip" @showMoveDot="showMoveDotFun"></buy-cart>-->
                                             <buy-cart :shopId='shopId' :foods='foods' @showMoveDot="showMoveDotFun"  @showChooseList="showChooseList" @showReduceTip="showReduceTip"></buy-cart>
                                         </footer>
                                     </section>
@@ -204,12 +203,12 @@
                                 <section class="rating_header_right">
                                     <p>
                                         <span>服务态度</span>
-                                        <!--<rating-star :rating='ratingScoresData.service_score'></rating-star>-->
+                                        <rating-star :rating='ratingScoresData.service_score'></rating-star>
                                         <span class="rating_num">{{ratingScoresData.service_score.toFixed(1)}}</span>
                                     </p>
                                     <p>
                                         <span>菜品评价</span>
-                                        <!--<rating-star :rating='ratingScoresData.food_score'></rating-star>-->
+                                        <rating-star :rating='ratingScoresData.food_score'></rating-star>
                                         <span class="rating_num">{{ratingScoresData.food_score.toFixed(1)}}</span>
                                     </p>
                                     <p>
@@ -229,7 +228,7 @@
                                             <section class="username_star">
                                                 <p class="username">{{item.username}}</p>
                                                 <p class="star_desc">
-                                                    <!--<rating-star :rating='item.rating_star'></rating-star>-->
+                                                    <rating-star :rating='item.rating_star'></rating-star>
                                                     <span class="time_spent_desc">{{item.time_spent_desc}}</span>
                                                 </p>
                                             </section>
@@ -313,6 +312,7 @@
     import loading from '../../../src/components/common/loading'
     import buyCart from '../../../src/components/common/buyCart'
     import {loadMore, getImgPath} from '../../../src/components/common/mixin'
+    import ratingStar from '../../../src/components/common/ratingStar'
     import BScroll from 'better-scroll'
     export default{
         data(){
@@ -634,7 +634,7 @@
             },
         },
         components:{
-            loading,buyCart
+            loading,buyCart,ratingStar
         },
         watch: {
             //showLoading变化时说明组件已经获取初始化数据，在下一帧nextTick进行后续操作

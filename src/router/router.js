@@ -8,10 +8,9 @@ const food = r => require.ensure([], () => r(require('../page/food/food')), 'foo
 const shop = r => require.ensure([], () => r(require('../page/shop/shop')), 'shop')
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
 const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/children/shopSafe')), 'shopSafe')
+const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
 
-
-
-export default [{
+    export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
     children: [ //二级路由。对应App.vue
@@ -60,6 +59,9 @@ export default [{
                     path: 'shopSafe', //商铺安全认证页
                     component: shopSafe,
                 }, ]
+			},{
+                path: 'foodDetail', //食品详情页
+                component: foodDetail,
 			}]
 	    }
 
