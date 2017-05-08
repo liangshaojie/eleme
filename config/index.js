@@ -39,7 +39,7 @@ module.exports = {
           '/promotion',
           '/eus',
       ],
-      proxypath: 'https://mainsite-restapi.ele.me',
+      proxypath: 'http://mainsite-restapi.ele.me',
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
