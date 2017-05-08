@@ -21,9 +21,34 @@ const setpromise = data => {
         resolve(data)
     })
 }
+
+//编译环境使用真实数据
+// if (process.env.NODE_ENV == 'development') {
+//     /**
+//      * 获取首页默认地址
+//      */
+//     var cityGuess = () => fetch('GET', '/v1/cities', {
+//         type: 'guess'
+//     });
+// }
+
+//编译环境使用真实数据
+if(process.env.NODE_ENV == 'development'){
+    // 获取首页默认地址
+    var cityGuess = () => fetch('GET', '/v1/cities', {
+        type: 'guess'
+    });
+}else{
+    var cityGuess = () => setpromise(home.guesscity);
+}
+export {cityGuess}
+
+
+
+
+
 export const getUser = () => setpromise(login.userInfo);
 export const getAddressList = (user_id) => setpromise(addresspart.address);
-export const cityGuess = () => setpromise(home.guesscity);
 export const hotcity = () => setpromise(home.hotcity);
 export const groupcity = () => setpromise(home.groupcity);
 export const currentcity = number => setpromise(city.currentcity);

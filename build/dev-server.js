@@ -17,8 +17,6 @@ var port = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
-// https://github.com/chimurai/http-proxy-middleware
-var proxyTable = config.dev.proxyTable
 
 var app = express()
 var compiler = webpack(webpackConfig)
@@ -39,14 +37,25 @@ compiler.plugin('compilation', function (compilation) {
   })
 })
 
-// proxy api requests
-Object.keys(proxyTable).forEach(function (context) {
-  var options = proxyTable[context]
-  if (typeof options === 'string') {
-    options = { target: options }
-  }
-  app.use(proxyMiddleware(options.filter || context, options))
-})
+var context = config.dev.context
+var proxypath = config.dev.proxypath
+
+var options = {
+    target: proxypath,
+    changeOrigin: true,
+}
+//将代理请求的配置应用到express服务上
+if (context.length) {
+    app.use(proxyMiddleware(context, options))
+}
+app.use(proxyMiddleware('/payapi', {
+    target: 'https://pay.ele.me',
+    changeOrigin: true,
+}))
+app.use(proxyMiddleware('/m.ele.me@json', {
+    target: 'https://crayfish.elemecdn.com',
+    changeOrigin: true,
+}))
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
@@ -73,7 +82,6 @@ module.exports = app.listen(port, function (err) {
     console.log(err)
     return
   }
-
   // when env is testing, don't need open it
   if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
     opn(uri)
