@@ -34,13 +34,33 @@ const setpromise = data => {
 
 //编译环境使用真实数据
 if(process.env.NODE_ENV == 'development'){
-    /**
-     * 获取商铺评价分类
-     */
+    // 下订单
+    var placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => setpromise(confirm.palceOrder);
+    // var placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => fetch('POST', '/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
+    //     address_id,
+    //     come_from: "mobile_web",
+    //     deliver_time: "",
+    //     description,
+    //     entities,
+    //     geohash,
+    //     paymethod_id: 1,
+    //     sig,
+    // });
+    // 获取地址列表    接口有问题
+    var getAddress = (id, sig) => setpromise(confirm.addressList);
+    // var getAddress = (id, sig) => fetch('GET', '/v1/carts/' + id + '/addresses', {
+    //     sig
+    // });
+    // 确认订单    接口有问题
+    var checkout = (geohash, entities) => setpromise(confirm.checkout);
+    // var checkout = (geohash, entities) => fetch('POST', '/v1/carts/checkout', {
+    //     come_from: "web",
+    //     geohash,
+    //     entities,
+    // });
+     //  获取商铺评价分类
     var ratingTags = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid + '/ratings/tags', {});
-    /**
-     * 获取商铺评价分数
-     */
+    // 获取商铺评价分数
     var ratingScores = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid + '/ratings/scores', {});
     /**
      * 获取商铺评价列表
@@ -134,6 +154,9 @@ if(process.env.NODE_ENV == 'development'){
     // 获取首页默认地址
     var cityGuess = () => fetch('GET', '/v1/cities', {type: 'guess'});
 }else{
+    var placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => setpromise(confirm.palceOrder);
+    var getAddress = (id, sig) => setpromise(confirm.addressList);
+    var checkout = (geohash, entities) => setpromise(confirm.checkout);
     var ratingTags = shopid => setpromise(shop.tage);
     var ratingScores = shopid => setpromise(shop.scores);
     var getRatingList = (offset, tag_name = '') => setpromise(shop.ratingList);
@@ -155,7 +178,7 @@ if(process.env.NODE_ENV == 'development'){
     var cityGuess = () => setpromise(home.guesscity);
 }
 
-export {ratingTags,ratingScores,getRatingList,foodMenu,shopDetails,foodActivity,foodDelivery,foodCategory,searchRestaurant,shopList,msiteFoodTypes,msiteAdress,searchplace,currentcity,groupcity,hotcity,getAddressList,getUser,cityGuess}
+export {placeOrders,getAddress,checkout,ratingTags,ratingScores,getRatingList,foodMenu,shopDetails,foodActivity,foodDelivery,foodCategory,searchRestaurant,shopList,msiteFoodTypes,msiteAdress,searchplace,currentcity,groupcity,hotcity,getAddressList,getUser,cityGuess}
 
 
 

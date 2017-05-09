@@ -8,7 +8,13 @@ import {
 	RECORD_SHOPDETAIL,
     ADD_CART,
     REDUCE_CART,
-    CLEAR_CART
+    CLEAR_CART,
+    SAVE_SHOPID,
+    SAVE_CART_ID_SIG,
+    CHOOSE_ADDRESS,
+    SAVE_ORDER_PARAM,
+    NEED_VALIDATION,
+    ORDER_SUCCESS
 }from './mutation-types.js'
 import {
 	setStore,
@@ -110,7 +116,33 @@ export default {
         state.cartList = {...state.cartList};
         setStore('buyCart', state.cartList);
     },
-
+    //保存商铺id
+    [SAVE_SHOPID](state, shopid) {
+        state.shopid = shopid;
+    },
+    //保存下单后购物id 和 sig
+    [SAVE_CART_ID_SIG](state, {cart_id, sig}) {
+        state.cart_id = cart_id;
+        state.sig = sig;
+    },
+    //选择的地址
+    [CHOOSE_ADDRESS](state, {address, index}) {
+        state.choosedAddress = address;
+        state.addressIndex = index;
+    },
+    //保存下单参数，用户验证页面调用
+    [SAVE_ORDER_PARAM](state, orderParam) {
+        state.orderParam = orderParam;
+    },
+    //保存下单需要验证的返回值
+    [NEED_VALIDATION](state, needValidation) {
+        state.needValidation = needValidation;
+    },
+    //下单成功，保存订单返回信息
+    [ORDER_SUCCESS](state, order) {
+        state.cartPrice = null;
+        state.orderMessage = order;
+    },
 }
 
 
