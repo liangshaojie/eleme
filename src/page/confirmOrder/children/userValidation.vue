@@ -48,30 +48,29 @@
         beforeDestroy(){
             clearInterval(this.timer);
         },
+        computed: {
+            ...mapState([
+                'needValidation', 'cart_id', 'sig', 'orderParam'
+            ]),
+        },
         methods: {
             ...mapMutations([
                 'CHANGE_ORDER_PARAM', 'ORDER_SUCCESS'
             ]),
-            //获取验证信息
-            async getData(){
-                this.reCallVerify = await rePostVerify(this.cart_id, this.sig, this.type);
-                if (this.reCallVerify.message) {
-                    this.showAlert = true;
-                    this.alertText = this.reCallVerify.message;
-                }
-            },
             //确认订单
             async confrimOrder(){
+//                这里有问题，明天来解决
+                
                 this.CHANGE_ORDER_PARAM({validation_code: this.validate, validation_token: this.reCallVerify.validate_token})
                 let orderRes = await validateOrders(this.orderParam);
-//                //如果信息错误则提示，否则进入付款页面
-//                if (orderRes.message) {
-//                    this.showAlert = true;
-//                    this.alertText = orderRes.message;
-//                    return
-//                }
-//                this.ORDER_SUCCESS(orderRes);
-//                this.$router.push('/confirmOrder/payment');
+                //如果信息错误则提示，否则进入付款页面
+                if (orderRes.message) {
+                    this.showAlert = true;
+                    this.alertText = orderRes.message;
+                    return
+                }
+                this.ORDER_SUCCESS(orderRes);
+                this.$router.push('/confirmOrder/payment');
             },
             //发送语音验证
             sendVoice(){
