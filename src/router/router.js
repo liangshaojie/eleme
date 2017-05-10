@@ -12,6 +12,7 @@ const foodDetail = r => require.ensure([], () => r(require('../page/shop/childre
 const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
 const chooseAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/chooseAddress')), 'chooseAddress')
 const remark = r => require.ensure([], () => r(require('../page/confirmOrder/children/remark')), 'remark')
+const invoice = r => require.ensure([], () => r(require('../page/confirmOrder/children/invoice')), 'invoice')
 
 export default [{
     path: '/',
@@ -78,6 +79,9 @@ export default [{
                 },{
                     path: 'remark', //订单备注
                     component: remark,
+                },{
+                    path: 'invoice', //发票抬头
+                    component: invoice,
                 }
             ]
         }

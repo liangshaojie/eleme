@@ -87,7 +87,8 @@
                 <router-link :to="checkoutData.invoice.is_available? '/confirmOrder/invoice': ''" class="hongbo" :class="{support_is_available: checkoutData.invoice.is_available}">
                     <span>发票抬头</span>
                     <span>
-                        {{checkoutData.invoice.status_text}}
+                        {{invoice == true ? '不需要发票' : '需要发票'}}
+                        <!--{{checkoutData.invoice.status_text}}-->
                         <svg class="address_empty_right">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                         </svg>
@@ -272,7 +273,7 @@
                 }else{
                     return str.substr(0, str.lastIndexOf('，')) ;
                 }
-            },
+            }
         },
         watch: {
             userInfo: function (value) {

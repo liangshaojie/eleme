@@ -16,7 +16,8 @@ import {
     NEED_VALIDATION,
     ORDER_SUCCESS,
     CONFIRM_ADDRESS,
-    CONFIRM_REMARK
+    CONFIRM_REMARK,
+    CONFIRM_INVOICE
 }from './mutation-types.js'
 import {
 	setStore,
@@ -153,6 +154,10 @@ export default {
     [CONFIRM_REMARK](state, {remarkText, inputText}) {
         state.remarkText = remarkText;
         state.inputText = inputText;
+    },
+    //是否开发票
+    [CONFIRM_INVOICE](state, invoice) {
+        state.invoice = invoice;
     },
 }
 
