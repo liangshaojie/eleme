@@ -14,7 +14,8 @@ import {
     CHOOSE_ADDRESS,
     SAVE_ORDER_PARAM,
     NEED_VALIDATION,
-    ORDER_SUCCESS
+    ORDER_SUCCESS,
+    CONFIRM_ADDRESS
 }from './mutation-types.js'
 import {
 	setStore,
@@ -142,6 +143,10 @@ export default {
     [ORDER_SUCCESS](state, order) {
         state.cartPrice = null;
         state.orderMessage = order;
+    },
+    //确认订单页添加新的的地址
+    [CONFIRM_ADDRESS](state, newAddress) {
+        state.newAddress.push(newAddress);
     },
 }
 
