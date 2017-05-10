@@ -15,7 +15,8 @@ import {
     SAVE_ORDER_PARAM,
     NEED_VALIDATION,
     ORDER_SUCCESS,
-    CONFIRM_ADDRESS
+    CONFIRM_ADDRESS,
+    CONFIRM_REMARK
 }from './mutation-types.js'
 import {
 	setStore,
@@ -147,6 +148,11 @@ export default {
     //确认订单页添加新的的地址
     [CONFIRM_ADDRESS](state, newAddress) {
         state.newAddress.push(newAddress);
+    },
+    //记录订单页面用户选择的备注, 传递给订单确认页面
+    [CONFIRM_REMARK](state, {remarkText, inputText}) {
+        state.remarkText = remarkText;
+        state.inputText = inputText;
     },
 }
 

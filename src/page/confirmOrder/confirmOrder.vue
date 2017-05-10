@@ -258,6 +258,28 @@
             ...mapState([
                 'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'
             ]),
+            //备注页返回的信息进行处理
+            remarklist: function (){
+                let str = new String;
+                if (this.remarkText) {
+                    Object.values(this.remarkText).forEach(item => {
+                        str += item[1] + '，';
+                    })
+                }
+                //是否有自定义备注，分开处理
+                if (this.inputText) {
+                    return str + this.inputText;
+                }else{
+                    return str.substr(0, str.lastIndexOf('，')) ;
+                }
+            },
+        },
+        watch: {
+            userInfo: function (value) {
+                if (value && value.user_id) {
+                    this.initAddress();
+                }
+            },
         },
         components:{
             loading,headTop,alertTip

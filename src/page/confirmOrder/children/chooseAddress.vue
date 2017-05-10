@@ -25,6 +25,27 @@
                         </div>
                     </li>
                 </ul>
+                <section id="out_delivery" v-if="deliverdisable.length">
+                    <header class="out_header">以下地址超出配送范围</header>
+                    <ul class="deliverable_address">
+                        <li v-for="(item,index) in deliverdisable">
+                            <svg class="choosed_address">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select"></use>
+                            </svg>
+                            <div>
+                                <header>
+                                    <span>{{item.name}}</span>
+                                    <span>{{item.sex == 1? '先生' : '女士'}}</span>
+                                    <span>{{item.phone}}</span>
+                                </header>
+                                <div class="address_detail ellipsis">
+                                    <span v-if="item.tag" :style="{backgroundColor: '#ccc', color: '#fff'}">{{item.tag}}</span>
+                                    <p>{{item.address_detail}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
             </section>
         </section>
     </div>
@@ -34,8 +55,6 @@
     import headTop from '../../../../src/components/header/head'
     import {mapState, mapMutations} from 'vuex'
     import {getAddress} from '../../../../src/service/getData'
-
-
     export default{
         data(){
             return{
@@ -52,6 +71,7 @@
         created(){
             this.id = this.$route.query.id;
             this.sig = this.$route.query.sig;
+            this.initData();
         },
         computed:{
             ...mapState([
@@ -83,7 +103,6 @@
             },
             //初始化信息
             async initData(){
-                console.log("初始化了");
                 this.addressList = [];
                 this.deliverable = [];
                 this.deliverdisable = [];
