@@ -35,6 +35,30 @@ const setpromise = data => {
 //编译环境使用真实数据
 if(process.env.NODE_ENV == 'development'){
     /**
+     * 搜索地址
+     */
+
+    var searchNearby = keyword => fetch('GET', '/v1/pois', {
+        type: 'nearby',
+        keyword
+    });
+    /**
+     * 添加地址
+     */
+    var postAddAddress = (userId, address, address_detail, geohash, name, phone, phone_bk, poi_type, sex, tag, tag_type) => setpromise(confirm.addAddress);
+    // var postAddAddress = (userId, address, address_detail, geohash, name, phone, phone_bk, poi_type, sex, tag, tag_type) => fetch('POST', '/v1/users/' + userId + '/addresses', {
+    //     address,
+    //     address_detail,
+    //     geohash,
+    //     name,
+    //     phone,
+    //     phone_bk,
+    //     poi_type,
+    //     sex,
+    //     tag,
+    //     tag_type,
+    // });
+    /**
      * 获取快速备注列表
      */
     var getRemark = (id, sig) => setpromise(confirm.remark);
@@ -161,6 +185,8 @@ if(process.env.NODE_ENV == 'development'){
     // 获取首页默认地址
     var cityGuess = () => fetch('GET', '/v1/cities', {type: 'guess'});
 }else{
+    var searchNearby = keyword => setpromise(confirm.searchAddress);
+    var postAddAddress = (userId, address, address_detail, geohash, name, phone, phone_bk, poi_type, sex, tag, tag_type) => setpromise(confirm.addAddress);
     var getRemark = (id, sig) => setpromise(confirm.remark);
     var placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => setpromise(confirm.palceOrder);
     var getAddress = (id, sig) => setpromise(confirm.addressList);
@@ -186,7 +212,7 @@ if(process.env.NODE_ENV == 'development'){
     var cityGuess = () => setpromise(home.guesscity);
 }
 
-export {getRemark,placeOrders,getAddress,checkout,ratingTags,ratingScores,getRatingList,foodMenu,shopDetails,foodActivity,foodDelivery,foodCategory,searchRestaurant,shopList,msiteFoodTypes,msiteAdress,searchplace,currentcity,groupcity,hotcity,getAddressList,getUser,cityGuess}
+export {searchNearby,postAddAddress,getRemark,placeOrders,getAddress,checkout,ratingTags,ratingScores,getRatingList,foodMenu,shopDetails,foodActivity,foodDelivery,foodCategory,searchRestaurant,shopList,msiteFoodTypes,msiteAdress,searchplace,currentcity,groupcity,hotcity,getAddressList,getUser,cityGuess}
 
 
 

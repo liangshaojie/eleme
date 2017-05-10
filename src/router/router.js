@@ -13,6 +13,8 @@ const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrd
 const chooseAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/chooseAddress')), 'chooseAddress')
 const remark = r => require.ensure([], () => r(require('../page/confirmOrder/children/remark')), 'remark')
 const invoice = r => require.ensure([], () => r(require('../page/confirmOrder/children/invoice')), 'invoice')
+const addAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/addAddress')), 'addAddress')
+const searchAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/children/searchAddress')), 'searchAddress')
 
 export default [{
     path: '/',
@@ -76,6 +78,18 @@ export default [{
                 {
                     path: 'chooseAddress', //选择地址
                     component: chooseAddress,
+                    children: [
+                        {
+                            path: 'addAddress', //添加地址
+                            component: addAddress,
+                            children:[
+                                {
+                                    path: 'searchAddress', //搜索地址
+                                    component: searchAddress,
+                                }
+                            ]
+                        }
+                    ]
                 },{
                     path: 'remark', //订单备注
                     component: remark,

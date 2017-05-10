@@ -17,7 +17,8 @@ import {
     ORDER_SUCCESS,
     CONFIRM_ADDRESS,
     CONFIRM_REMARK,
-    CONFIRM_INVOICE
+    CONFIRM_INVOICE,
+    CHOOSE_SEARCH_ADDRESS
 }from './mutation-types.js'
 import {
 	setStore,
@@ -158,6 +159,10 @@ export default {
     //是否开发票
     [CONFIRM_INVOICE](state, invoice) {
         state.invoice = invoice;
+    },
+    //选择搜索的地址
+    [CHOOSE_SEARCH_ADDRESS](state, place) {
+        state.searchAddress = place;
     },
 }
 
