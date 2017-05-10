@@ -18,7 +18,8 @@ import {
     CONFIRM_ADDRESS,
     CONFIRM_REMARK,
     CONFIRM_INVOICE,
-    CHOOSE_SEARCH_ADDRESS
+    CHOOSE_SEARCH_ADDRESS,
+    CHANGE_ORDER_PARAM
 }from './mutation-types.js'
 import {
 	setStore,
@@ -163,6 +164,10 @@ export default {
     //选择搜索的地址
     [CHOOSE_SEARCH_ADDRESS](state, place) {
         state.searchAddress = place;
+    },
+    //修改下单参数
+    [CHANGE_ORDER_PARAM](state, newParam) {
+        state.orderParam = Object.assign({}, state.orderParam, newParam);
     },
 }
 

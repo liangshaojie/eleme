@@ -15,6 +15,8 @@ const remark = r => require.ensure([], () => r(require('../page/confirmOrder/chi
 const invoice = r => require.ensure([], () => r(require('../page/confirmOrder/children/invoice')), 'invoice')
 const addAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/addAddress')), 'addAddress')
 const searchAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/children/searchAddress')), 'searchAddress')
+const payment = r => require.ensure([], () => r(require('../page/confirmOrder/children/payment')), 'payment')
+const userValidation = r => require.ensure([], () => r(require('../page/confirmOrder/children/userValidation')), 'userValidation')
 
 export default [{
     path: '/',
@@ -96,6 +98,12 @@ export default [{
                 },{
                     path: 'invoice', //发票抬头
                     component: invoice,
+                },{
+                    path: 'payment', //付款页面
+                    component: payment,
+                },{
+                    path: 'userValidation', //用户验证
+                    component: userValidation,
                 }
             ]
         }
