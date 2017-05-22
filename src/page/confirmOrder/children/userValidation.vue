@@ -39,7 +39,8 @@
             }
         },
         created(){
-            this.sig = this.$route.query.sig;
+//            this.sig = this.$route.query.sig;
+            this.sig = '5f39c5c428e8e73d0a4fde09bc0f9107';
         },
         mounted(){
             this.count();
@@ -50,7 +51,7 @@
         },
         computed: {
             ...mapState([
-                'needValidation', 'cart_id', 'sig', 'orderParam'
+                'needValidation', 'cart_id', 'orderParam'
             ]),
         },
         methods: {
@@ -60,7 +61,6 @@
             //确认订单
             async confrimOrder(){
 //                这里有问题，明天来解决
-                
                 this.CHANGE_ORDER_PARAM({validation_code: this.validate, validation_token: this.reCallVerify.validate_token})
                 let orderRes = await validateOrders(this.orderParam);
                 //如果信息错误则提示，否则进入付款页面

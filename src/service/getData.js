@@ -35,18 +35,29 @@ const setpromise = data => {
 //编译环境使用真实数据
 if(process.env.NODE_ENV == 'development'){
     // 下订单
-    var validateOrders = ({user_id, cart_id, address_id, description, entities, geohash, sig, validation_code, validation_token}) => fetch('POST', '/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
-        address_id,
-        come_from: "mobile_web",
-        deliver_time: "",
-        description,
-        entities,
-        geohash,
-        paymethod_id: 1,
-        sig,
-        validation_code,
-        validation_token,
-    });
+    var validateOrders = ({
+                          user_id,
+                          cart_id,
+                          address_id,
+                          description,
+                          entities,
+                          geohash,
+                          sig,
+                          validation_code,
+                          validation_token
+                      }) => setpromise(confirm.orderSuccess);
+    // var validateOrders = ({user_id, cart_id, address_id, description, entities, geohash, sig, validation_code, validation_token}) => fetch('POST', '/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
+    //     address_id,
+    //     come_from: "mobile_web",
+    //     deliver_time: "",
+    //     description,
+    //     entities,
+    //     geohash,
+    //     paymethod_id: 1,
+    //     sig,
+    //     validation_code,
+    //     validation_token,
+    // });
     //重新发送订单验证码
     var rePostVerify = (cart_id, sig, type) => setpromise(confirm.verfiyCode);
     // var rePostVerify = (cart_id, sig, type) => fetch('POST', '/v1/carts/' + cart_id + '/verify_code', {
@@ -119,10 +130,11 @@ if(process.env.NODE_ENV == 'development'){
         restaurant_id
     });
     // 获取shop页面商铺详情
-    var shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopping/restaurant/' + shopid, {
-        latitude,
-        longitude: longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'
-    });
+    var shopDetails = (shopid, latitude, longitude) => setpromise(shop.shopDetails);
+    // var shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopping/restaurant/' + shopid, {
+    //     latitude,
+    //     longitude: longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'
+    // });
     // 获取food页面的商家属性活动列表
     var foodActivity = (latitude, longitude) => fetch('GET', '/shopping/v1/restaurants/activity_attributes', {
         latitude,

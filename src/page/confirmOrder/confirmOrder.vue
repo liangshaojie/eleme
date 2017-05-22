@@ -179,6 +179,7 @@
                     this.alertText = '请添加一个收获地址';
                     return
                 }
+
                 //保存订单
                 this.SAVE_ORDER_PARAM({
                     user_id: this.userInfo.user_id,
