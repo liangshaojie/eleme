@@ -34,6 +34,16 @@ const setpromise = data => {
 
 //编译环境使用真实数据
 if(process.env.NODE_ENV == 'development'){
+    /**
+     * 重新发送订单验证码
+     */
+    var payRequest = (merchantOrderNo, userId) => fetch('GET', '/payapi/payment/queryOrder', {
+        merchantId: 5,
+        merchantOrderNo,
+        source: 'MOBILE_WAP',
+        userId,
+        version: '1.0.0',
+    });
     // 下订单
     var validateOrders = ({
                           user_id,
@@ -209,6 +219,7 @@ if(process.env.NODE_ENV == 'development'){
     // 获取首页默认地址
     var cityGuess = () => fetch('GET', '/v1/cities', {type: 'guess'});
 }else{
+    var payRequest = (merchantOrderNo, userId) => setpromise(confirm.payDetail);
     var validateOrders = ({
                           user_id,
                           cart_id,
@@ -248,7 +259,7 @@ if(process.env.NODE_ENV == 'development'){
     var cityGuess = () => setpromise(home.guesscity);
 }
 
-export {validateOrders,rePostVerify,searchNearby,postAddAddress,getRemark,placeOrders,getAddress,checkout,ratingTags,ratingScores,getRatingList,foodMenu,shopDetails,foodActivity,foodDelivery,foodCategory,searchRestaurant,shopList,msiteFoodTypes,msiteAdress,searchplace,currentcity,groupcity,hotcity,getAddressList,getUser,cityGuess}
+export {payRequest,validateOrders,rePostVerify,searchNearby,postAddAddress,getRemark,placeOrders,getAddress,checkout,ratingTags,ratingScores,getRatingList,foodMenu,shopDetails,foodActivity,foodDelivery,foodCategory,searchRestaurant,shopList,msiteFoodTypes,msiteAdress,searchplace,currentcity,groupcity,hotcity,getAddressList,getUser,cityGuess}
 
 
 
